@@ -1,0 +1,37 @@
+{
+  "createTime": 1664142631007,
+  "updateTime": 1664142631008,
+  "name": "HelloWorld101",
+  "description": "Edit or extend this sample workflow. Set the workflow name to get started",
+  "version": 1,
+  "tasks": [
+    {
+      "name": "simple_task",
+      "taskReferenceName": "hello_world",
+      "inputParameters": {},
+      "type": "SIMPLE",
+      "decisionCases": {},
+      "defaultCase": [],
+      "forkTasks": [],
+      "startDelay": 0,
+      "joinOn": [],
+      "optional": false,
+      "defaultExclusiveJoinTask": [],
+      "asyncComplete": false,
+      "loopOver": []
+    }
+  ],
+  "inputParameters": [],
+  "outputParameters": {
+    "data": "${get_random_fact.output.response.body.fact}",
+    "factLength": "${get_random_fact.output.response.body.length}"
+  },
+  "schemaVersion": 2,
+  "restartable": true,
+  "workflowStatusListenerEnabled": false,
+  "ownerEmail": "viren@orkes.io",
+  "timeoutPolicy": "ALERT_ONLY",
+  "timeoutSeconds": 0,
+  "variables": {},
+  "inputTemplate": {}
+}
