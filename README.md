@@ -1,4 +1,4 @@
-# Learnig with Orkes Academy
+# Learning with Orkes Academy
 
 ## Running your first worker
-The [Running your first worker](https://orkes.io/content/docs/getting-started/run/running-first-worker) tutorial will walk you through running your first worker.  This will use the SimpleWorker.java and OrkesWorkerApplication.java
+The [Running your first worker](https://orkes.io/content/docs/getting-started/run/running-first-worker) tutorial will walk you through running your first worker.  This will use the SimpleWorker.java and OrkesAcademyApplication.java
