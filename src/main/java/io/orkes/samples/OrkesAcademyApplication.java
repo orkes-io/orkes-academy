@@ -1,8 +1,10 @@
 package io.orkes.samples;
 
-import com.netflix.conductor.client.automator.TaskRunnerConfigurer;
-import com.netflix.conductor.client.http.TaskClient;
 import com.netflix.conductor.client.worker.Worker;
+import io.orkes.conductor.client.ApiClient;
+import io.orkes.conductor.client.OrkesClients;
+import io.orkes.conductor.client.TaskClient;
+import io.orkes.conductor.client.automator.TaskRunnerConfigurer;
 import io.orkes.conductor.client.http.OrkesClient;
 import io.orkes.conductor.client.http.OrkesTaskClient;
 import lombok.extern.slf4j.Slf4j;
@@ -41,32 +43,30 @@ public class OrkesAcademyApplication {
     @Bean
     public TaskClient taskClient() {
         String rootUri = env.getProperty(CONDUCTOR_SERVER_URL);
-        log.info("Conductor Server URL: {}", rootUri);
-
-        OrkesTaskClient taskClient = new OrkesTaskClient();
-        taskClient.setRootURI(rootUri);
-        setCredentialsIfPresent(taskClient);
-
-        return taskClient;
-    }
-
-    private void setCredentialsIfPresent(OrkesClient client) {
-        String keyId = env.getProperty(CONDUCTOR_CLIENT_KEY_ID);
+        String key = env.getProperty(CONDUCTOR_CLIENT_KEY_ID);
         String secret = env.getProperty(CONDUCTOR_CLIENT_SECRET);
 
-        log.info("Conductor Key: {}", keyId);
-
-        if ("_CHANGE_ME_".equals(keyId) || "_CHANGE_ME_".equals(secret)) {
+        if ("_CHANGE_ME_".equals(key) || "_CHANGE_ME_".equals(secret)) {
             log.error("Please provide an application key id and secret");
             throw new RuntimeException("No Application Key");
         }
-        if (!StringUtils.isBlank(keyId) && !StringUtils.isBlank(secret)) {
-            log.info("setCredentialsIfPresent: Using authentication with access key '{}'", keyId);
-            client.withCredentials(keyId, secret);
+
+        ApiClient apiClient = null;
+
+        log.info("Conductor Server URL: {}", rootUri);
+        if(StringUtils.isNotBlank(key) && StringUtils.isNotBlank(secret)) {
+            log.info("Using Key and Secret to connect to the server");
+            apiClient = new ApiClient(rootUri, key, secret);
         } else {
             log.info("setCredentialsIfPresent: Proceeding without client authentication");
+            apiClient = new ApiClient(rootUri);
         }
+        OrkesClients orkesClients = new OrkesClients(apiClient);
+        TaskClient taskClient = orkesClients.getTaskClient();
+        return taskClient;
     }
+
+
 
     @Bean
     public TaskRunnerConfigurer taskRunnerConfigurer(List<Worker> workersList, TaskClient taskClient) {
