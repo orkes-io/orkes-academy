@@ -1,6 +1,6 @@
 {
   "name": "image_convert_resize",
-  "description": "Image Processing Workflow",
+  "description": "Image Processing Workflow, converts a image into specified formats and size",
   "version": 1,
   "tasks": [
     {
@@ -22,29 +22,13 @@
       "defaultExclusiveJoinTask": [],
       "asyncComplete": false,
       "loopOver": []
-    },
-    {
-      "name": "upload_toS3",
-      "taskReferenceName": "upload_toS3_ref",
-      "inputParameters": {
-        "fileLocation": "${image_convert_resize_ref.output.fileLocation}"
-      },
-      "type": "SIMPLE",
-      "decisionCases": {},
-      "defaultCase": [],
-      "forkTasks": [],
-      "startDelay": 0,
-      "joinOn": [],
-      "optional": false,
-      "defaultExclusiveJoinTask": [],
-      "asyncComplete": false,
-      "loopOver": []
     }
   ],
   "outputParameters": {
-
-    "fileLocation": "${upload_toS3_ref.output.fileLocation}"
-
+    "fileLocation": "${image_convert_resize_ref.output.fileLocation}",
+    "outputWidth": "${image_convert_resize_ref.output.outputWidth}",
+    "outputHeight": "${image_convert_resize_ref.output.outputHeight}",
+    "outputFormat": "${image_convert_resize_ref.output.outputFormat}"
   },
   "schemaVersion": 2,
   "restartable": true,
