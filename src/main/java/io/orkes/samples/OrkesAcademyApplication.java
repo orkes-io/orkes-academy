@@ -20,7 +20,7 @@ import java.util.Properties;
 
 @Slf4j
 @SpringBootApplication
-public class OrkesWorkersApplication {
+public class OrkesAcademyApplication {
 
     private static final String CONDUCTOR_SERVER_URL = "conductor.server.url";
     private static final String CONDUCTOR_CLIENT_KEY_ID = "conductor.security.client.key-id";
@@ -28,14 +28,14 @@ public class OrkesWorkersApplication {
 
     private final Environment env;
 
-    public OrkesWorkersApplication(Environment env) {
+    public OrkesAcademyApplication(Environment env) {
         this.env = env;
     }
 
     public static void main(String[] args) throws IOException {
-        log.info("Loading Orkes Demo workers application...");
+        log.info("Loading Orkes Academy application...");
         loadExternalConfig();
-        SpringApplication.run(OrkesWorkersApplication.class, args);
+        SpringApplication.run(OrkesAcademyApplication.class, args);
     }
 
     @Bean
@@ -80,7 +80,7 @@ public class OrkesWorkersApplication {
     }
 
     /**
-     * Reads properties from the location specified in <code>ORKES_WORKERS_CONFIG_FILE</code>
+     * Reads properties from the location specified in <code>ORKES_ACADEMY_CONFIG_FILE</code>
      * and sets them as system properties so they override the default properties.
      * <p>
      * Spring Boot property hierarchy is documented here,
@@ -89,7 +89,7 @@ public class OrkesWorkersApplication {
      * @throws IOException if file can't be read.
      */
     private static void loadExternalConfig() throws IOException {
-        String configFile = System.getProperty("ORKES_WORKERS_CONFIG_FILE");
+        String configFile = System.getProperty("ORKES_ACADEMY_CONFIG_FILE");
         if (!ObjectUtils.isEmpty(configFile)) {
             FileSystemResource resource = new FileSystemResource(configFile);
             if (resource.exists()) {
