@@ -17,6 +17,13 @@ then
   SERVER_PORT=8080
 fi
 
+read -p "Enter the access key for the container: " ACCESS_KEY </dev/tty || {
+  ACCESS_KEY=invalid
+}
+
+echo $ACCESS_KEY | docker login --username orkesdocker --password-stdin
+
+
 docker volume create postgres
 docker volume create redis
 
