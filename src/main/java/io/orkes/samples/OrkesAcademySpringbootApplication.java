@@ -5,8 +5,6 @@ import io.orkes.conductor.client.ApiClient;
 import io.orkes.conductor.client.OrkesClients;
 import io.orkes.conductor.client.TaskClient;
 import io.orkes.conductor.client.automator.TaskRunnerConfigurer;
-import io.orkes.conductor.client.http.OrkesClient;
-import io.orkes.conductor.client.http.OrkesTaskClient;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.SpringApplication;
@@ -22,7 +20,7 @@ import java.util.Properties;
 
 @Slf4j
 @SpringBootApplication
-public class OrkesAcademyApplication {
+public class OrkesAcademySpringbootApplication {
 
     private static final String CONDUCTOR_SERVER_URL = "conductor.server.url";
     private static final String CONDUCTOR_CLIENT_KEY_ID = "conductor.security.client.key-id";
@@ -30,14 +28,14 @@ public class OrkesAcademyApplication {
 
     private final Environment env;
 
-    public OrkesAcademyApplication(Environment env) {
+    public OrkesAcademySpringbootApplication(Environment env) {
         this.env = env;
     }
 
     public static void main(String[] args) throws IOException {
         log.info("Loading Orkes Academy application...");
         loadExternalConfig();
-        SpringApplication.run(OrkesAcademyApplication.class, args);
+        SpringApplication.run(OrkesAcademySpringbootApplication.class, args);
     }
 
     @Bean
