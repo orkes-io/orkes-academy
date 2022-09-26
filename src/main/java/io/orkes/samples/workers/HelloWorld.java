@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class HelloWorld implements Worker {
     @Override
     public String getTaskDefName() {
-        return "hello_world";
+        return "hello_world_task";
     }
 
     @Override
