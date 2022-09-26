@@ -17,6 +17,7 @@ then
   SERVER_PORT=8080
 fi
 
+ACCESS_KEY=invalid
 read -p "Enter the access key for the container: " ACCESS_KEY </dev/tty || {
   ACCESS_KEY=invalid
 }
